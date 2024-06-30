@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite*
+__pycache__/
+*.egg*
+media/
