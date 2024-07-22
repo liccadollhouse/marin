@@ -13,3 +13,4 @@ class DivisionAdmin(admin.ModelAdmin):
     inlines = [EntryInline]
     
 admin.site.register(Division, DivisionAdmin)
+admin.site.register(ContestEntry)

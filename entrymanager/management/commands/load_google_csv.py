@@ -1,0 +1,44 @@
+import csv
+
+from django.core.management.base import BaseCommand, CommandError
+from entrymanager.models import ContestEntry, Division
+
+class Command(BaseCommand):
+    help = "Imports the CSV used by AnimeFest from the Google Form."
+
+    def add_arguments(self, parser):
+        parser.add_argument('--path', type=str)
+
+    def handle(self, *args, **kwargs):
+        path = kwargs['path']
+        with open(path, 'rt') as f:
+            reader = csv.reader(f, delimiter=',', quotechar='"')
+            googleentrynumber=0;
+            for row in reader:
+                if row[0] != "Timestamp" :
+                    googleentrynumber = googleentrynumber + 1
+                    divisionkey = "none"
+                    
+                    if row[12] == "Skits (craftsmanship judging optional)" :
+                        divisionkey = "skit"
+                    elif row[12] == "Masters" :
+                        divisionkey = "master"
+                    else :
+                        divisionkey = row[12].lower()
+                                        
+                    try:
+                        division_object = Division.objects.get(division_name=divisionkey)    
+                    except Division.DoesNotExist:
+                        division_object = Division(division_name=divisionkey)
+                        division_object.save()
+                        
+                    ContestEntry.objects.create(
+                        legal_name = row[2],
+                        cosplay_name = row[3],
+                        character = row[6],
+                        series = row[7],
+                        google_entry_number = googleentrynumber,
+                        division = division_object
+                    )
+                    
+
