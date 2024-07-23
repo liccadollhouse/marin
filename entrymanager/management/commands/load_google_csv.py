@@ -38,12 +38,12 @@ class Command(BaseCommand):
                         division_object.save()                                        
                     
                     ContestEntry.objects.create(
-                        legal_name = row[2],
-                        cosplay_name = row[3],
-                        character = row[6],
-                        series = row[7],
+                        legal_name = row[2].strip(),
+                        cosplay_name = row[3].strip(),
+                        character = row[6].strip(),
+                        series = row[7].strip(),
                         google_entry_number = googleentrynumber,
-                        email_address = row[1],
+                        email_address = row[1].strip(),
                         division = division_object,
                         judging_time = judging_object
                     )
