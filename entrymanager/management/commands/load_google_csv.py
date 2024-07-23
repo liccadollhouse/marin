@@ -1,7 +1,7 @@
 import csv
 
 from django.core.management.base import BaseCommand, CommandError
-from entrymanager.models import ContestEntry, Division
+from entrymanager.models import ContestEntry, Division, JudgingSlot
 
 class Command(BaseCommand):
     help = "Imports the CSV used by AnimeFest from the Google Form."
@@ -14,6 +14,11 @@ class Command(BaseCommand):
         with open(path, 'rt') as f:
             reader = csv.reader(f, delimiter=',', quotechar='"')
             googleentrynumber=0;
+            try:
+                judging_object = JudgingSlot.objects.get(judging_time="none")    
+            except JudgingSlot.DoesNotExist:
+                judging_object = JudgingSlot(judging_time="none")
+                judging_object.save()
             for row in reader:
                 if row[0] != "Timestamp" :
                     googleentrynumber = googleentrynumber + 1
@@ -30,15 +35,17 @@ class Command(BaseCommand):
                         division_object = Division.objects.get(division_name=divisionkey)    
                     except Division.DoesNotExist:
                         division_object = Division(division_name=divisionkey)
-                        division_object.save()
-                        
+                        division_object.save()                                        
+                    
                     ContestEntry.objects.create(
                         legal_name = row[2],
                         cosplay_name = row[3],
                         character = row[6],
                         series = row[7],
                         google_entry_number = googleentrynumber,
-                        division = division_object
+                        email_address = row[1],
+                        division = division_object,
+                        judging_time = judging_object
                     )
                     
 

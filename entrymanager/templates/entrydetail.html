@@ -1,0 +1,13 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<form method="post">{% csrf_token %}    
+    {% buttons %}    
+    {% bootstrap_form form size='large' %}
+    <input type="submit" value="Update and Check-in">
+    {% endbuttons %}
+</form>

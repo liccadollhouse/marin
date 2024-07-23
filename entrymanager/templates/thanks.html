@@ -1,5 +1,18 @@
-<title>Marin Cosplay Contest Management system</title>
-<p>Your entry has been recorded.  Please see the volunteer for your badge label and judging time (if applicable)
-<li><a href="{% url 'contestantentry' %}">Return to Add a Contestant Entry</a></li>
-<li><a href="{% url 'index' %}">Return to Home</a></li>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
+    <title>AnimeFest/GameFest Cosplay Contest Management System - Contestant Entry Form</title>
+</head>
+<body>
+<center><h1>AnimeFest/GameFest Cosplay Contest Management System - Entry Was Submitted</h1></center>
+
+<h2><b><p style="color:green;">Your entry has been recorded.  Please see the volunteer for your badge label and judging time (if applicable).</h2></b></p>
+
+<h3><a href="{% url 'contestantentry' %}">Return to Add a Contestant Entry</a></li></h3>
+
+</body>
 

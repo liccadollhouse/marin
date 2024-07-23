@@ -1,5 +1,20 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
+    <title>AnimeFest/GameFest Cosplay Contest Management System - Contestant Entry Form</title>
+</head>
+<body>
+<center><h1>AnimeFest/GameFest Cosplay Contest Management System - Contestant Entry Form</h1></center>
+
 <form action="/entrymanager/contestantentry/" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
+    {% bootstrap_form form size='large' %}
+    <p style="color:red;"><b>By pressing "Submit", you acknowledge that you have read the contest rules and will strictly abide by them.  Failure to abide by the contest rules will result in disqualification of your entry.  In addition, you are not allowed to disrespect or assault AnimeFest/GameFest staff members, volunteers, hotel employees, other contestants, or cosplay judges before, during, and after the contest.  This includes social media posts.  Conduct that is in violation of this acknowledgement will result in disqualification of your entry.</b></p>
+    <center><p><input type="submit" value="Submit"><center>
 </form>
+
+</body>
