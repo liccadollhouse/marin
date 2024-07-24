@@ -1,17 +1,8 @@
-{# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{% load static %}
-
 <head>
-    <title>AnimeFest/GameFest Cosplay Contest Management System - All Entries - Check-in Staff View</title>
+    <title>AnimeFest/GameFest Cosplay Contest Management System - Detail View - Check-in Staff View</title>
 </head>
 <body>
-<center><h1>AnimeFest/GameFest Cosplay Contest Management System - All Entries - Check-in Staff View</h1></center>
+<center><h1>AnimeFest/GameFest Cosplay Contest Management System - Detail View - Check-in Staff View</h1></center>
 
 <h2><p style="color:red;"><b>Check-in Instructions For Volunteer Staff</b></h2>
 <ul>
@@ -21,17 +12,19 @@
     <li>Mark the back of their badges with a label with their division and internal division number.
     <li>If the contestant has a judging time, remind them of their judging time.
     <li>Remind the contestant on when to show up to rehearsal.
-</ul>    
+</ul>
 
+{# Load the tag library #}
+{% load bootstrap3 %}
 
-{% load render_table from django_tables2 %}
-<!doctype html>
-<html>
-    <head>
-        <title>List of Entries</title>        
-    </head>
-    <body>
-        {% render_table table %}
-    </body>
-</html>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
+<form method="post">{% csrf_token %}    
+    {% buttons %}    
+    {% bootstrap_form form size='large' %}    
+    <input type="submit" value="Print Stickers For Contestant">
+    {% endbuttons %}
+</form>
+</body>

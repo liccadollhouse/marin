@@ -44,12 +44,12 @@ class ContestEntry(models.Model):
     division = models.ForeignKey(Division,on_delete=models.CASCADE)
     google_entry_number = models.IntegerField(default=-1)
     email_address = models.CharField(max_length=50)
-    internal_division_number = models.IntegerField(default=0)
+    internal_division_number = models.IntegerField(default=0)    
     def __str__(self):
         return self.cosplay_name
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("detail", kwargs={"pk": self.pk})
+        return reverse("entrymanager:detail", kwargs={"pk": self.pk})
     
     
     

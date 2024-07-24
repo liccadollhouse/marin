@@ -9,3 +9,7 @@ class ContestantEntryForm(forms.Form):
     character = forms.CharField(label="Character(s)", max_length=100)
     series = forms.CharField(label="Series", max_length=100)
     division = forms.ChoiceField(label="Division",choices=Division.VALID_DIVISIONS)
+
+class NumBadgeStickersForm(forms.Form):
+    numprint = forms.IntegerField(label="Number of stickers to print",min_value=0,max_value=9)
+    

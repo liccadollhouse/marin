@@ -5,11 +5,13 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django_tables2 import SingleTableView, MultiTableMixin
+from django.views.generic.edit import FormMixin
 
 from .tables import EntryTable, EntryTableDivision
-from .forms import ContestantEntryForm
+from .forms import ContestantEntryForm, NumBadgeStickersForm
 
 from .models import ContestEntry, JudgingSlot, Division
+from .dynamic_image import badge_sticker
 
 # Create your views here.
 
@@ -75,7 +77,7 @@ class EntryDetailView(generic.UpdateView):
     template_name = "entrydetail.html"
     model = ContestEntry
     fields = ["cosplay_name","character","series","division","judging_time"]
-    success_url = "/entrymanager/allentries"
+    
     def form_valid(self, form):        
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.        
@@ -85,14 +87,29 @@ class EntryDetailView(generic.UpdateView):
         except Division.DoesNotExist:
             division_object = Division(division_name=divisionkey)
             division_object.save()    
-        
         division_index = list(dict(Division.VALID_DIVISIONS).values()).index(str(divisionkey))        
-        TempEntry = ContestEntry.objects.get(cosplay_name=form.cleaned_data['cosplay_name'])
-        if TempEntry.internal_division_number == 0:
-            TempEntry.internal_division_number = ContestEntry.objects.filter(internal_division_number__gt=0,division=division_index).count() + 1
-            TempEntry.save()
         
-        return HttpResponseRedirect("/entrymanager/allentries/")
+        judgingkey = form.cleaned_data['judging_time']
+        try:
+            judging_object = JudgingSlot.objects.get(judging_time=judgingkey)    
+        except JudgingSlot.DoesNotExist:
+            judging_object = JudgingSlot(judging_time=judgingkey)
+            judging_object.save()
+        
+        TempEntry = ContestEntry.objects.get(cosplay_name=form.cleaned_data['cosplay_name'])       
+        TempEntry.cosplay_name = form.cleaned_data['cosplay_name']        
+        TempEntry.character = form.cleaned_data['character']        
+        TempEntry.series = form.cleaned_data['series']                
+        if TempEntry.division != division_object :
+            TempEntry.internal_division_number = 0
+        TempEntry.division = division_object     
+        TempEntry.judging_time = judging_object
+        if TempEntry.internal_division_number == 0:
+            TempEntry.internal_division_number = ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name=str(divisionkey)).count() + 1
+            TempEntry.save()            
+        
+        return HttpResponseRedirect(reverse("entrymanager:badgesticker",args=(TempEntry.id,)))
+        
 
 class EntriesByDivisionView(MultiTableMixin, generic.TemplateView):
     template_name = "entrybydivision.html"
@@ -104,4 +121,21 @@ class EntriesByDivisionView(MultiTableMixin, generic.TemplateView):
             EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=4),order_by='internal_division_number'),
             EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=5),order_by='internal_division_number'),
     ]
+    
+class BadgeStickerView(FormMixin,generic.DetailView):  
+     model = ContestEntry
+     template_name = "badgesticker.html"
+     form_class = NumBadgeStickersForm
+     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+     def form_valid(self, form):
+        TempEntry = self.get_object()        
+        if TempEntry.internal_division_number != 0:
+            badge_sticker(TempEntry,form.cleaned_data['numprint'])                    
+        return HttpResponseRedirect(reverse("entrymanager:allentries"))
     
