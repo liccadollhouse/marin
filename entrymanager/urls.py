@@ -11,4 +11,5 @@ urlpatterns = [
     path("<int:pk>/", views.EntryDetailView.as_view(), name="detail"),
     path("<int:pk>/badgesticker/", views.BadgeStickerView.as_view(), name="badgesticker"),
     path("entriesbydivision/", views.EntriesByDivisionView.as_view(), name="entriesbydivision"),
+    path("managerview/", views.managerview, name="managerview"),
 ] 

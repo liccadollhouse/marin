@@ -1,3 +1,17 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
 <title>Marin Cosplay Contest Management system</title> 
-<li><a href="{% url 'entrymanager:contestantentry' %}">Add Contestant</a></li>
+</head>
+<body>
+
+<h2>This is the main page for the Marin Cosplay Contest Management system, used by World Fandom for AnimeFest/GameFest.
+
+<h2>This is for contestants.
+
+<h3><a href="{% url 'entrymanager:contestantentry' %}">Add Contestant - Enter Cosplay Runway or Strut Your Stuff</a>
 

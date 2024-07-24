@@ -1,0 +1,19 @@
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
+<title>Marin Cosplay Contest Management system - Manager/Supervisor View</title> 
+</head>
+<body>
+<center><b><h1>Marin Cosplay Contest Management system - Manager/Supervisor View</center></b>
+<h1><a href="{% url 'entrymanager:contestantentry' %}">Add Contestant</a></h1>
+
+<h1><a href="{% url 'entrymanager:allentries' %}">View all entries</a></h1>
+
+<h1><a href="{% url 'entrymanager:entriesbydivision' %}">View all entries checked in and divided by division</a></h1>
+
+</body>

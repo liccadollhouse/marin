@@ -18,6 +18,9 @@ from .dynamic_image import badge_sticker
 def index(request):
      return render(request, 'index.html')
 
+def managerview(request):
+     return render(request, 'managerview.html')
+
 
 def contestantentry(request):
     # if this is a POST request we need to process the form data
@@ -114,12 +117,12 @@ class EntryDetailView(generic.UpdateView):
 class EntriesByDivisionView(MultiTableMixin, generic.TemplateView):
     template_name = "entrybydivision.html"
     tables = [
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=0),order_by='internal_division_number'),
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=1),order_by='internal_division_number'),
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=2),order_by='internal_division_number'),
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=3),order_by='internal_division_number'),
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=4),order_by='internal_division_number'),
-            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division=5),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Youth"),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Novice"),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Journeyman"),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Master"),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Skit"),order_by='internal_division_number'),
+            EntryTableDivision(ContestEntry.objects.filter(internal_division_number__gt=0,division__division_name="Strut Your Stuff"),order_by='internal_division_number'),
     ]
     
 class BadgeStickerView(FormMixin,generic.DetailView):  
