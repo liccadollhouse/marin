@@ -12,4 +12,10 @@ urlpatterns = [
     path("<int:pk>/badgesticker/", views.BadgeStickerView.as_view(), name="badgesticker"),
     path("entriesbydivision/", views.EntriesByDivisionView.as_view(), name="entriesbydivision"),
     path("managerview/", views.managerview, name="managerview"),
+    path("allentriesjudging/", views.AllEntriesJudgingView.as_view(), name="allentriesjudging"),
+    path("<int:pk>/judgingform/", views.EntryJudgingFormView.as_view(), name="judgingform"),
+    path("hallcontestentry/", views.HallContestEntryView.as_view(), name="hallcontestentry"),
+    path("thankshall/", views.thankshall, name="thankshall"),
+    path("hallallentries/", views.HallAllEntriesView.as_view(), name="hallallentries"),
+    path("<int:pk>/detailhall/", views.HallEntryDetailView.as_view(), name="detailhall"),
 ] 

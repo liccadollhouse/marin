@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w8gl2guafn@$tlbk)4warkx69v*5+#3a)hm0y@y+63crx5s)6#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+
+DEBUG = True 
+
+ALLOWED_HOSTS = ['10.2.1.1','10.2.1.2','10.2.1.3','10.2.1.4','10.2.1.5','10.2.1.6','10.2.1.7','10.2.1.8','10.2.1.9','127.0.0.1','10.42.0.13','10.42.0.1']
 
 
 # Application definition
@@ -119,9 +123,22 @@ MEDIA_ROOT = '/var/tmp/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = '/var/www/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+BOOTSTRAP3 = {
+    'include_jquery': False,
+    'jquery_url': '/static/jquery.min.js',
+    'base_url': '/static/bootstrap/',
+    'css_url': '/static/bootstrap/css/bootstrap.min.css',
+    'theme_url': '/static/bootstrap/css/bootstrap-theme.min.css',
+    'javascript_url': '/static/bootstrap/js/bootstrap.min.js',
+}
+BOOTSTRAP_BASE_URL = '/static/bootstrap/'

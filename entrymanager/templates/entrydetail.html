@@ -1,3 +1,10 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <head>
     <title>AnimeFest/GameFest Cosplay Contest Management System - Detail View - Check-in Staff View</title>
 </head>
@@ -14,17 +21,13 @@
     <li>Remind the contestant on when to show up to rehearsal.
 </ul>
 
-{# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 
 <form method="post">{% csrf_token %}    
-    {% buttons %}    
     {% bootstrap_form form size='large' %}
     <input type="submit" value="Update and Check-in">
-    {% endbuttons %}
+    
 </form>
+
+<h1><b><a href="/entrymanager/{{ id }}/judgingform/">Judging Form</a>
+
 </body>

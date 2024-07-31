@@ -35,7 +35,7 @@ class Division(models.Model):
     def __str__(self):
         return self.get_division_name_display()
 
-class ContestEntry(models.Model):    
+class ContestEntry(models.Model): 
     legal_name = models.CharField(max_length=50)
     cosplay_name = models.CharField(max_length=50)
     character = models.CharField(max_length=50)
@@ -51,7 +51,24 @@ class ContestEntry(models.Model):
         from django.urls import reverse
         return reverse("entrymanager:detail", kwargs={"pk": self.pk})
     
-    
+class HallContestEntry(models.Model):  
+    VALID_DIVISIONS = [
+        ("novice","Novice"),
+        ("journeyman","Journeyman"),
+        ("master","Master"),
+    ]   
+    legal_name = models.CharField(max_length=50)
+    cosplay_name = models.CharField(max_length=50)
+    character = models.CharField(max_length=50)
+    series = models.CharField(max_length=50)
+    division = models.CharField(max_length=50,choices=VALID_DIVISIONS,default="novice")
+    email_address = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=20)    
+    def __str__(self):
+        return self.cosplay_name
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("entrymanager:detailhall", kwargs={"pk": self.pk})    
     
     
 
