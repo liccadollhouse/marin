@@ -15,7 +15,6 @@ class JudgingSlotInline(admin.TabularInline):
     
 class DivisionAdmin(admin.ModelAdmin):   
     inlines = [EntryInline]
-    list_filter = ["internal_division_number"]
 class ContestEntryAdmin(admin.ModelAdmin):
     list_display = ["google_entry_number", "email_address","cosplay_name", "character", "series", "division", "internal_division_number", "judging_time"]
     list_filter = ["internal_division_number"]
