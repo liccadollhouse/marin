@@ -3,7 +3,7 @@ attrs==23.2.0
 beautifulsoup4==4.12.3
 brother_ql-inventree==1.2
 click==8.1.7
-Django==5.0.7
+Django==5.1
 django-bootstrap3==24.2
 django-tables2==2.7.0
 future==1.0.0
