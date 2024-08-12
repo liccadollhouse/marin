@@ -38,10 +38,11 @@ class Division(models.Model):
 class ContestEntry(models.Model): 
     legal_name = models.CharField(max_length=50)
     cosplay_name = models.CharField(max_length=50)
+    pronouns = models.CharField(max_length=15,default="Unknown")
     character = models.CharField(max_length=50)
     series = models.CharField(max_length=50)
     judging_time = models.ForeignKey(JudgingSlot,on_delete=models.CASCADE) 
-    division = models.ForeignKey(Division,on_delete=models.CASCADE)
+    division = models.ForeignKey(Division,on_delete=models.CASCADE)    
     google_entry_number = models.IntegerField(default=-1)
     email_address = models.CharField(max_length=50)
     internal_division_number = models.IntegerField(default=0)    
@@ -59,6 +60,7 @@ class HallContestEntry(models.Model):
     ]   
     legal_name = models.CharField(max_length=50)
     cosplay_name = models.CharField(max_length=50)
+    pronouns = models.CharField(max_length=15,default="Unknown")
     character = models.CharField(max_length=50)
     series = models.CharField(max_length=50)
     division = models.CharField(max_length=50,choices=VALID_DIVISIONS,default="novice")

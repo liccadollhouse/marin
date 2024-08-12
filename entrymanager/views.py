@@ -49,6 +49,7 @@ def contestantentry(request):
                 cosplay_name = form.cleaned_data['cosplay_name'],
                 character = form.cleaned_data['character'],
                 series = form.cleaned_data['series'],
+                pronouns = form.cleaned_data['preferred_pronouns'],
                 google_entry_number = 0,
                 email_address = form.cleaned_data['email_address'],
                 division = division_object.first(),
