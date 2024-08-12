@@ -91,7 +91,7 @@ class AllEntriesJudgingView(SingleTableView):
 class EntryDetailView(generic.UpdateView,ModelFormMixin):    
     template_name = "entrydetail.html"
     model = ContestEntry
-    fields = ["cosplay_name","character","series","division","judging_time"]
+    fields = ["cosplay_name","pronouns","character","series","division","judging_time"]
     def get_context_data(self, **kwargs):
         TempEntry = self.get_object()
         context = super().get_context_data(**kwargs)
@@ -171,6 +171,7 @@ class EntryJudgingFormView(generic.DetailView):
         context["cosplay_name"] = TempEntry.cosplay_name
         context["character"] = TempEntry.character
         context["series"] = TempEntry.series
+        context["pronouns"] = TempEntry.pronouns
         context["division"] = str(TempEntry.division)
         context["entrynumber"] = EntryNumber = str(TempEntry.division)[0] + " " + str(TempEntry.internal_division_number)
         return context
