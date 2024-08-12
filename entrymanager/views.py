@@ -179,7 +179,7 @@ class EntryJudgingFormView(generic.DetailView):
 class HallContestEntryView(generic.CreateView):
     model = HallContestEntry
  
-    fields = [ "legal_name", "cosplay_name", "character", "series", "division", "email_address", "phone_number" ]
+    fields = [ "legal_name", "cosplay_name", "pronouns", "character", "series", "division", "email_address", "phone_number" ]
     template_name = "hallcontestentryform.html"
     success_url = reverse_lazy("entrymanager:thankshall")
     
@@ -204,6 +204,7 @@ class HallEntryDetailView(generic.DetailView):
         TempEntry = self.get_object()
         context = super().get_context_data(**kwargs)
         context["cosplay_name"] = TempEntry.cosplay_name
+        context["pronouns"] = TempEntry.pronouns
         context["character"] = TempEntry.character
         context["series"] = TempEntry.series
         context["division"] = TempEntry.division
